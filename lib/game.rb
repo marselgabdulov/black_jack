@@ -1,4 +1,5 @@
 require_relative 'player'
+require_relative 'deck'
 
 class Game
   attr_accessor :dealer, :player, :bank, :deck
@@ -7,7 +8,7 @@ class Game
     @player = nil
     @dealer = Player.new
     @bank = 0
-    @deck = nil # need class Deck
+    @deck = Deck.new
   end
 
   def deal

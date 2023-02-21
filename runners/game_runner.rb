@@ -7,3 +7,4 @@ puts game.hit
 puts game.stand
 puts game.open
 puts game.restart
+puts game.deck.deal_card.to_s
