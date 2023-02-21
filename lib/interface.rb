@@ -1,11 +1,14 @@
-class Interface
+require_relative 'player'
 
+class Interface
   def initialize
     # need class Game
+    @player = nil # should be in game instance
   end
 
   def new_player(name)
     # need class Player
+    @player = Player.new(name: name)
     # after creating new player game should deal
   end
 
