@@ -1,15 +1,15 @@
+require_relative 'game'
 require_relative 'player'
 
 class Interface
+  attr_accessor :game
+
   def initialize
-    # need class Game
-    @player = nil # should be in game instance
+    @game = Game.new
   end
 
   def new_player(name)
-    # need class Player
-    @player = Player.new(name: name)
-    # after creating new player game should deal
+    @game.player = Player.new(name: name.capitalize)
   end
 
   def hit

@@ -5,7 +5,7 @@ describe Interface do
     @interface = Interface.new
   end
 
-  context 'responders' do
+  context 'Responders' do
     it 'should respond to hit' do
       expect(@interface).to respond_to(:hit)
     end
@@ -24,6 +24,17 @@ describe Interface do
 
     it 'should respond to quit' do
       expect(@interface).to respond_to(:quit)
+    end
+
+    it 'should respond to new_player' do
+      expect(@interface).to respond_to(:new_player)
+    end
+  end
+
+  context 'Instance methods' do
+    it 'should create new player' do
+      @interface.new_player('Max')
+      expect(@interface.game.player.name).to eq('Max')
     end
   end
 end

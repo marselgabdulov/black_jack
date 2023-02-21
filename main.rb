@@ -2,7 +2,13 @@ require_relative 'lib/interface'
 
 interface = Interface.new
 interface.help
-interface.new_player
+
+puts 'Please, enter your name'
+name = gets.chomp
+interface.new_player(name)
+puts "Good luck, #{interface.game.player.name}!"
+# game should deal after creating new player
+interface.game.deal
 
 while (line = $stdin.gets.rstrip)
   case line
