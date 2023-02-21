@@ -1,3 +1,5 @@
+require_relative 'hand'
+
 class Player
   attr_reader :name
   attr_accessor :bank, :hand
@@ -5,6 +7,6 @@ class Player
   def initialize(**options)
     @name = options[:name] ||= 'Dealer'
     @bank = 100
-    @hand = [] # need class Hand
+    @hand = Hand.new
   end
 end
