@@ -5,7 +5,7 @@ describe Player do
     @player = Player.new
   end
 
-  context 'responders' do
+  context 'Responders' do
     it 'should respond to name' do
       expect(@player).to respond_to(:name)
     end
@@ -16,6 +16,13 @@ describe Player do
 
     it 'should respond to hand' do
       expect(@player).to respond_to(:hand)
+    end
+  end
+
+  context 'Instance methods' do
+    it 'should decrease player bank by 10' do
+      @player.bet
+      expect(@player.bank).to eq(90)
     end
   end
 end

@@ -15,3 +15,6 @@ player.hand.append(card1)
 player.hand.append(card2)
 player.hand.open
 puts player.hand.to_s
+
+player.bet
+puts player.bank

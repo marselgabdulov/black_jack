@@ -9,4 +9,8 @@ class Player
     @bank = 100
     @hand = Hand.new
   end
+
+  def bet
+    @bank -= 10
+  end
 end
