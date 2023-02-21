@@ -8,3 +8,5 @@ Commands:
 - hit
 - stand
 - open
+- help
+- quit
