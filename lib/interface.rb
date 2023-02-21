@@ -13,7 +13,7 @@ class Interface
   end
 
   def hit
-    puts 'hit'
+    @game.hit
   end
 
   def stand
