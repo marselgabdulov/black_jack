@@ -2,7 +2,7 @@ require_relative 'player'
 require_relative 'deck'
 
 class Game
-  attr_accessor :dealer, :player, :bank, :deck
+  attr_accessor :dealer, :player, :bank, :deck, :current_player
 
   def initialize
     @player = nil
@@ -21,6 +21,7 @@ class Game
     @dealer.hand = Hand.new
     @player.hand = Hand.new
     @player.hand.open
+    @current_player = @player
     2.times do
       @player.hand.append(@deck.deal_card)
       @dealer.hand.append(@deck.deal_card)
@@ -28,7 +29,8 @@ class Game
   end
 
   def hit
-    puts 'game hit'
+    # (только если у пользователя на руках 2 карты). В этом случае игроку добавляется еще одна случайная карта, сумма очков пересчитывается, ход переходит дилеру. Может быть добавлена только одна карта.
+
   end
 
   def stand

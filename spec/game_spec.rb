@@ -67,6 +67,11 @@ describe Game do
         @game.deal
         expect(@game.player.hand.is_open).to be_truthy
       end
+
+      it 'should set current player' do
+        @game.deal
+        expect(@game.current_player).to eq(@game.player)
+      end
     end
   end
 end
