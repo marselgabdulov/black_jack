@@ -6,6 +6,7 @@ class Interface
 
   def initialize
     @game = Game.new
+    @current_player = @game.current_player
   end
 
   def new_player(name)
@@ -21,7 +22,7 @@ class Interface
   end
 
   def open
-    puts 'open'
+    @game.open
   end
 
   def help
