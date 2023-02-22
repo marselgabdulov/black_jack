@@ -7,11 +7,14 @@ puts 'Please, enter your name'
 name = gets.chomp
 interface.new_player(name)
 puts "Good luck, #{interface.game.player.name}!"
-# game should deal after creating new player
-interface.game.deal
+begin
+  interface.game.deal
+rescue RuntimeError => e
+  puts e.message
+end
 
-while (line = $stdin.gets.rstrip)
-  case line
+while (command = $stdin.gets.rstrip)
+  case command
   when 'hit'
     interface.hit
   when 'stand'

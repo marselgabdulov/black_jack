@@ -36,5 +36,11 @@ describe Interface do
       @interface.new_player('Max')
       expect(@interface.game.player.name).to eq('Max')
     end
+
+    # it 'should raise error if player has no money' do
+    #   @interface.new_player('Max')
+    #   @interface.game.player.bank = 0
+    #   expect(@interface.send(:restart)).to raise_error(RuntimeError, 'Some of players has no money')
+    # end
   end
 end

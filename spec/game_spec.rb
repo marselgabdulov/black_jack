@@ -13,6 +13,10 @@ describe Game do
       expect(@game).to respond_to(:player)
     end
 
+    it 'should respond to playing' do
+      expect(@game).to respond_to(:playing)
+    end
+
     it 'should respond to dealer' do
       expect(@game).to respond_to(:dealer)
     end
@@ -40,10 +44,6 @@ describe Game do
     it 'should respond to open' do
       expect(@game).to respond_to(:open)
     end
-
-    it 'should respond to restart' do
-      expect(@game).to respond_to(:restart)
-    end
   end
 
   context 'Instance methods' do
@@ -68,28 +68,14 @@ describe Game do
         @game.deal
         expect(@game.player.hand.is_open).to be_truthy
       end
-
-      it 'should set current player' do
-        @game.deal
-        expect(@game.current_player).to eq(@game.player)
-      end
     end
 
     describe '#hit' do
-      # before do
-      #   @game.deal
-      # end
-
-      # it 'should raise wrong hand size error' do
-      #   card = Card.new(face: 'Ace', suit: '♥', value: 11)
-      #   @game.player.hand.cards = [card]
-      #   expect { @game.hit }.to raise_error(RuntimeError, 'Player must have at least 2 cards')
-      # end
-
-      # it 'should add card to current player hand' do
-      #   @game.hit
-      #   expect(@game.current_player.hand.cards.size).to eq(3)
-      # end
+      it 'should append card to players hand' do
+        @game.deal
+        @game.hit
+        expect(@game.player.hand.cards.size).to eq(3)
+      end
     end
 
     describe '#open' do

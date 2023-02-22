@@ -2,42 +2,59 @@ require_relative 'player'
 require_relative 'deck'
 
 class Game
-  attr_accessor :dealer, :player, :bank, :deck, :current_player, :winner
+  attr_accessor :dealer, :player, :bank, :deck, :playing
 
   def initialize
     @player = nil
     @dealer = Player.new
     @bank = 0
-    @deck = Deck.new
-    @current_player = nil
-    @winner = nil
-    @player_stands = 0
-    @dealer_stands = 0
+    @deck = nil
+    @playing = false
   end
 
   def deal
     raise "Can't play without player" if @player.nil?
 
+    @deck = Deck.new
     @dealer.bet
     @player.bet
-    @bank += 20
+    @bank = 20
     @dealer.hand = Hand.new
     @player.hand = Hand.new
+    @playing = true
     @player.hand.open
-    @current_player = @player
     2.times do
       @player.hand.append(@deck.deal_card)
       @dealer.hand.append(@deck.deal_card)
     end
+    show_bank_info
     show_hands
   end
 
   def hit
-    puts 'hit'
+    @player.hand.append(@deck.deal_card)
+    if @player.hand.score > 21
+      dealer_won
+      show_hands
+      open
+    else
+      dealer_hit
+    end
+  end
+
+  def dealer_hit
+    if @dealer.hand.score < 17
+      @dealer.hand.append(@deck.deal_card)
+    else
+      puts 'Dealer chose to stand'
+    end
+    # open hands because player already hit or stand and dealer has three cards
+    open
   end
 
   def stand
-    puts 'game stand'
+    puts 'Player chose to stand'
+    dealer_hit
   end
 
   def open
@@ -46,25 +63,15 @@ class Game
     show_hands
   end
 
-  def restart
-    # refresh bank and deck, check if player and dealer have enought money
-    puts 'game restart'
-  end
-
   private
 
   def set_winner
-    player_score = @player.hand.score
-    dealer_score = @dealer.hand.score
-
-    if (player_score <= 21 && dealer_score > 21) || (player_score <= 21 && player_score > dealer_score)
+    if (@player.hand.score <= 21 && @player.hand.score > @dealer.hand.score) || @dealer.hand.score > 21
       player_won
-    elsif (dealer_score <= 21 && player_score > 21) || (dealer_score <= 21 && dealer_score > player_score)
+    elsif (@dealer.hand.score <= 21 && @dealer.hand.score > @player.hand.score) || @player.hand.score > 21
       dealer_won
     else
-      @player.bank += 10
-      @dealer.bank += 10
-      puts 'Draw'
+      draw
     end
     @bank = 0
   end
@@ -72,11 +79,20 @@ class Game
   def player_won
     @player.bank += 20
     puts "#{player.name} is winner"
+    @playing = false
   end
 
   def dealer_won
     @dealer.bank += 20
     puts 'Dealer is winner'
+    @playing = false
+  end
+
+  def draw
+    @player.bank += 10
+    @dealer.bank += 10
+    puts 'Draw'
+    @playing = false
   end
 
   def show_hands
@@ -84,5 +100,10 @@ class Game
     puts "#{@player.name}'s hand: #{@player.hand}"
     puts "Dealer's #{@dealer.hand}"
     puts '----------------'
+  end
+
+  def show_bank_info
+    puts "You have #{@player.bank}"
+    puts "Dealer has #{@dealer.bank}"
   end
 end
