@@ -20,12 +20,12 @@ class Game
     @deck = Deck.new
     @dealer.bet
     @player.bet
-    @bank = BET_VALUE * 2
+    @bank = BET_VALUE * PLAYERS_NUMBER
     @dealer.hand = Hand.new
     @player.hand = Hand.new
     @playing = true
     @player.hand.open
-    2.times do
+    PLAYERS_NUMBER.times do
       @player.hand.append(@deck.deal_card)
       @dealer.hand.append(@deck.deal_card)
     end

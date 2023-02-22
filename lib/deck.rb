@@ -1,6 +1,9 @@
 require_relative 'card'
+require_relative 'constants'
 
 class Deck
+  include Constants
+
   attr_accessor :pack
 
   FACES = [*(2..10), 'Jack', 'Queen', 'King', 'Ace'].freeze
@@ -28,9 +31,9 @@ class Deck
               when Integer
                 face
               when 'Ace'
-                11
+                ACE_POINTS
               else
-                10
+                NOBLE_POINTS
               end
       SUITS.each { |suit| cards << Card.new(face: face, suit: suit, value: value) }
     end

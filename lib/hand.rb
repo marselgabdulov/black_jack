@@ -1,4 +1,8 @@
+require_relative 'constants'
+
 class Hand
+  include Constants
+
   attr_reader :is_open
   attr_accessor :score, :cards
 
@@ -32,7 +36,7 @@ class Hand
 
   def count_score(card)
     @score += if card.face == 'Ace'
-                if @score + card.value > 21
+                if @score + card.value > MAX_SCORE
                   1
                 else
                   11
@@ -40,7 +44,5 @@ class Hand
               else
                 card.value
               end
-    # not sure where it should raise
-    # raise 'Score greater than 21' if @score > 21
   end
 end

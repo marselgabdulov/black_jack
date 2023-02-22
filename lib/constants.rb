@@ -1,6 +1,9 @@
 module Constants
-  MAX_SCORE = 21
-  MAX_RISK = 17
+  ACE_POINTS = 11
   BET_VALUE = 10
+  MAX_RISK = 17
+  MAX_SCORE = 21
+  NOBLE_POINTS = 10
   PLAYERS_BANK = 100
+  PLAYERS_NUMBER = 2
 end
