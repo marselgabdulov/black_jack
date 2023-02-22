@@ -34,8 +34,6 @@ class Game
   def hit
     @player.hand.append(@deck.deal_card)
     if @player.hand.score > 21
-      dealer_won
-      show_hands
       open
     else
       dealer_hit
