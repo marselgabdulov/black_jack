@@ -20,7 +20,7 @@ describe Player do
   end
 
   context 'Instance methods' do
-    it 'should decrease player bank by 10' do
+    it 'should decrease player bank by BET_VALUE' do
       @player.bet
       expect(@player.bank).to eq(90)
     end

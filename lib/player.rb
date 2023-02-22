@@ -1,16 +1,18 @@
 require_relative 'hand'
+require_relative 'constants'
 
 class Player
+  include Constants
   attr_reader :name
   attr_accessor :bank, :hand
 
   def initialize(**options)
     @name = options[:name] ||= 'Dealer'
-    @bank = 100
+    @bank = PLAYERS_BANK
     @hand = Hand.new
   end
 
   def bet
-    @bank -= 10
+    @bank -= BET_VALUE
   end
 end
