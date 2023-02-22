@@ -40,16 +40,6 @@ class Game
     end
   end
 
-  def dealer_hit
-    if @dealer.hand.score < 17
-      @dealer.hand.append(@deck.deal_card)
-    else
-      puts 'Dealer chose to stand'
-    end
-    # open hands because player already hit or stand and dealer has three cards or chose to stand
-    open
-  end
-
   def stand
     puts 'Player chose to stand'
     dealer_hit
@@ -62,6 +52,16 @@ class Game
   end
 
   private
+
+  def dealer_hit
+    if @dealer.hand.score < 17
+      @dealer.hand.append(@deck.deal_card)
+    else
+      puts 'Dealer chose to stand'
+    end
+    # open hands because player already hit or stand and dealer has three cards or chose to stand
+    open
+  end
 
   def set_winner
     if (@player.hand.score <= 21 && @player.hand.score > @dealer.hand.score) || @dealer.hand.score > 21
