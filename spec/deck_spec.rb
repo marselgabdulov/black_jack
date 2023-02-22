@@ -18,4 +18,13 @@ describe Deck do
       expect(@deck).to respond_to(:replace_with)
     end
   end
+
+  context 'Instance methods' do
+    it 'should replace pack' do
+      card1 = Card.new(face: 9, suit: '♥', value: 9)
+      card2 = Card.new(face: 9, suit: '♥', value: 9)
+      @deck.replace_with([card1, card2])
+      expect(@deck.pack.size).to eq(2)
+    end
+  end
 end

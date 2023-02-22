@@ -14,8 +14,8 @@ class Deck
     @pack.pop
   end
 
-  def replace_with(new_deck)
-    @pack = new_deck
+  def replace_with(new_pack)
+    @pack = new_pack
   end
 
   private
