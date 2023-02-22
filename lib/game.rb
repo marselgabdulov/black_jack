@@ -1,7 +1,9 @@
 require_relative 'player'
 require_relative 'deck'
+require_relative 'constants'
 
 class Game
+  include Constants
   attr_accessor :dealer, :player, :bank, :deck, :playing
 
   def initialize
@@ -18,7 +20,7 @@ class Game
     @deck = Deck.new
     @dealer.bet
     @player.bet
-    @bank = 20
+    @bank = BET_VALUE * 2
     @dealer.hand = Hand.new
     @player.hand = Hand.new
     @playing = true
@@ -33,7 +35,7 @@ class Game
 
   def hit
     @player.hand.append(@deck.deal_card)
-    if @player.hand.score > 21
+    if @player.hand.score > MAX_SCORE
       open
     else
       dealer_hit
@@ -54,7 +56,7 @@ class Game
   private
 
   def dealer_hit
-    if @dealer.hand.score < 17
+    if @dealer.hand.score < MAX_RISK
       @dealer.hand.append(@deck.deal_card)
     else
       puts 'Dealer chose to stand'
@@ -64,9 +66,9 @@ class Game
   end
 
   def set_winner
-    if (@player.hand.score <= 21 && @player.hand.score > @dealer.hand.score) || @dealer.hand.score > 21
+    if (@player.hand.score <= MAX_SCORE && @player.hand.score > @dealer.hand.score) || @dealer.hand.score > MAX_SCORE
       player_won
-    elsif (@dealer.hand.score <= 21 && @dealer.hand.score > @player.hand.score) || @player.hand.score > 21
+    elsif (@dealer.hand.score <= MAX_SCORE && @dealer.hand.score > @player.hand.score) || @player.hand.score > MAX_SCORE
       dealer_won
     else
       draw
@@ -75,20 +77,20 @@ class Game
   end
 
   def player_won
-    @player.bank += 20
+    @player.bank += @bank
     puts "#{player.name} is winner"
     @playing = false
   end
 
   def dealer_won
-    @dealer.bank += 20
+    @dealer.bank += bank
     puts 'Dealer is winner'
     @playing = false
   end
 
   def draw
-    @player.bank += 10
-    @dealer.bank += 10
+    @player.bank += BET_VALUE
+    @dealer.bank += BET_VALUE
     puts 'Draw'
     @playing = false
   end
