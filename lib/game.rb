@@ -46,7 +46,7 @@ class Game
     else
       puts 'Dealer chose to stand'
     end
-    # open hands because player already hit or stand and dealer has three cards
+    # open hands because player already hit or stand and dealer has three cards or chose to stand
     open
   end
 
