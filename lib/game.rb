@@ -25,7 +25,7 @@ class Game
     @player.hand = Hand.new
     @playing = true
     @player.hand.open
-    PLAYERS_NUMBER.times do
+    2.times do
       @player.hand.append(@deck.deal_card)
       @dealer.hand.append(@deck.deal_card)
     end
