@@ -67,24 +67,18 @@ class Game
 
   def set_winner
     if (@player.hand.score <= MAX_SCORE && @player.hand.score > @dealer.hand.score) || @dealer.hand.score > MAX_SCORE
-      player_won
+      won(@player)
     elsif (@dealer.hand.score <= MAX_SCORE && @dealer.hand.score > @player.hand.score) || @player.hand.score > MAX_SCORE
-      dealer_won
+      won(@dealer)
     else
       draw
     end
     @bank = 0
   end
 
-  def player_won
-    @player.bank += @bank
+  def won(player)
+    player.bank += @bank
     puts "#{player.name} is winner"
-    @playing = false
-  end
-
-  def dealer_won
-    @dealer.bank += bank
-    puts 'Dealer is winner'
     @playing = false
   end
 
